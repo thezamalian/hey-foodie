@@ -9,10 +9,12 @@ import Navigation from './Pages/Shared/Navigation/Navigation';
 import Footer from './Pages/Shared/Footer/Footer';
 import Login from './Pages/Login/Login/Login';
 import Register from './Pages/Login/Register/Register';
+import AuthProvider from './contexts/AuthProvider/AuthProvider';
 
 function App() {
 	return (
-		<div className="App">
+	<div className="App">
+		<AuthProvider>
 			<Router>
 				<Navigation />
 				<Switch>
@@ -32,7 +34,8 @@ function App() {
 				</Switch>
 				<Footer />
 			</Router>
-		</div>
+		</AuthProvider>
+	</div>
 	);
 }
 
