@@ -12,8 +12,8 @@ const Services = () => {
         setValue(newValue);
       };
     return (
-        <Container>
-            <Typography variant='h4'>
+        <Container sx={{mt: 5}}>
+            <Typography variant='h4' sx={{mb:1}}>
                 Our Services
             </Typography>
             <Box sx={{ width: '100%', typography: 'body1' }}>

@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Container, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
+    const history = useHistory();
 
-    const {user, registerUser, isLoading} = useAuth();
+    const {user, registerUser, isLoading, authError} = useAuth();
 
     const handleOnChange = e => {
         const field = e.target.name;
@@ -15,7 +17,7 @@ const Register = () => {
         newLoginData[field] = value;
 
         setLoginData(newLoginData);
-        console.log(newLoginData);
+        // console.log(newLoginData);
     }
 
     const  handleOnSubmit = e => {
@@ -23,17 +25,17 @@ const Register = () => {
             alert('Your Password did not match!')
             return;
         }
-        registerUser(loginData.name, loginData.email, loginData.password);
-        console.log(user);
+        registerUser(loginData.name, loginData.email, loginData.password, history);
+        // console.log(user);
         e.preventDefault();
     }
     return (
-        <Container sx={{mt: 5}}>
+        <Container  sx={{mb: 5, mt: '150px'}}>
             <Typography variant="h5">
-                Please, Login to Order Your Tastes
+                Please Register to Order Your Tastes
             </Typography>
             <Box sx={{width: 0.75, mx: 'auto'}}>
-                <form onSubmit={handleOnSubmit}>
+                {!isLoading && <form onSubmit={handleOnSubmit}>
                     <TextField 
                         id="standard-basic" 
                         label="Your Name"
@@ -83,7 +85,10 @@ const Register = () => {
                         <br />
                     </Link>
                     <Button type="submit" variant='contained' sx={{width: 0.75, mt:1}}>Register</Button>
-                </form>
+                </form>}
+                {isLoading && <CircularProgress sx={{mt: 5}} />}
+                {user.email && <Alert severity='success'>You have registered successfully!</Alert>}
+                {authError && <Alert severity='error'>{authError}</Alert>}
             </Box>
         </Container>
     );

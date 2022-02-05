@@ -8,7 +8,7 @@ initializeFirebase();
 const useFirebase = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
@@ -24,7 +24,7 @@ const useFirebase = () => {
           return unsubscribe;
     }, []);
 
-    const registerUser = (name, email, password) => {
+    const registerUser = (name, email, password, history) => {
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -38,15 +38,18 @@ const useFirebase = () => {
                   }).catch((error) => {
                       setAuthError(error.message)
                   });
+                  history.replace('/');
             }).catch((error) => {
                 setAuthError(error.message);
             }).finally(() =>setIsLoading(false));
     }
-    const loginUser = (email, password) => {
+    const loginUser = (email, password, location, history) => {
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setAuthError('');
+                const destination = location?.state?.from || '/'
+                history.replace(destination);
             }).catch((error) => {
                 setAuthError(error.message);
             }).finally(() =>setIsLoading(false));
