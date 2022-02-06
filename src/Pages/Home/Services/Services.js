@@ -14,7 +14,7 @@ const Services = () => {
     // const foodArr = [1, 2, 3, 4, 5, 6];
 
     useEffect( () => {
-        const uri = `http://localhost:5000/foods`;
+        const uri = `https://murmuring-bastion-95101.herokuapp.com/foods`;
         fetch(uri) 
             .then(res => res.json())
             .then(data => {

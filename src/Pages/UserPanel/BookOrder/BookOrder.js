@@ -17,7 +17,7 @@ const BookOrder = () => {
     const [food, setFood] = useState({});
 
     useEffect(()=> {
-        const uri=`http://localhost:5000/foods/${id}`;
+        const uri=`https://murmuring-bastion-95101.herokuapp.com/foods/${id}`;
         fetch(uri)
             .then(res => res.json())
             .then(data => {
@@ -42,7 +42,7 @@ const BookOrder = () => {
         const newOrder = {...food, isPending: true, bookingData};
         // console.log(newOrder);
 
-        const uri = `http://localhost:5000/order`;
+        const uri = `https://murmuring-bastion-95101.herokuapp.com/order`;
         fetch(uri, {
             method: 'POST',
             headers: {
