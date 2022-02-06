@@ -8,18 +8,20 @@ initializeFirebase();
 const useFirebase = () => {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
 
     useEffect(() => {
+        setIsLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
             } else {
                 setUser({});
             }
+            setIsLoading(false);
           });
           return unsubscribe;
     }, []);

@@ -32,7 +32,7 @@ const Login = () => {
                 Please Login to Order Your Tastes
             </Typography>
             <Box sx={{width: 0.75, mx: 'auto'}}>
-                {!isLoading && <form onSubmit={handleOnSubmit}>
+                {(!isLoading )&& <form onSubmit={handleOnSubmit}>
                     <TextField 
                         id="standard-basic" 
                         label="Your Email"
@@ -61,9 +61,11 @@ const Login = () => {
                     </Link>
                     <Button type='submit' variant='contained' sx={{ width: 0.75, mt:1}}>Login</Button>
                 </form>}
+
                 {isLoading && <CircularProgress sx={{mt: 5}} />}
                 {user.email && <Alert severity='success'>You have logged in successfully!</Alert>}
                 {authError && <Alert severity='error'>{authError}</Alert>}
+
                 {!isLoading && <p>-------------------OR------------------</p>}
                 {!isLoading && <Button onClick={googleSignIn} variant='contained' color="warning" sx={{ width: 0.75, mt:2}}>Google Sign In</Button>}
             </Box>

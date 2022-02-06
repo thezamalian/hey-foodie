@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 // import food from '../../../images/Breakfast/breakfast1.png';
 
 const Service = ({food}) => {
-    const {name, img, details, price} = food;
+    const {_id, name, img, details, price} = food;
     return (
         <Grid item xs={12} sm={6} md={4}>
             <Card sx={{ maxWidth: 345, }}>
@@ -20,7 +20,7 @@ const Service = ({food}) => {
                         <Typography gutterBottom variant="h5" component="div">
                             {name}
                         </Typography>
-                        <Typography variant="body3" color="text.secondary" sx={{textAlign: 'center'}}>
+                        <Typography variant="body3" sx={{textAlign: 'center'}}>
                             Price: ${price}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
@@ -30,7 +30,7 @@ const Service = ({food}) => {
                 </Box>
                 <CardActions  sx={{width: '100%'}}>
                     <Box sx={{mx: 'auto'}}>
-                        <Link to="/book-order" >
+                        <Link to={`/book-order/${_id}`} >
                             <Button size="small" color="inherit" variant="contained" >
                                 Order Now <AddShoppingCartIcon />
                             </Button>

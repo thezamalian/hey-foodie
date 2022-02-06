@@ -43,7 +43,7 @@ function App() {
 						<AddReview />
 					</PrivateRoute>
 
-					<PrivateRoute path="/book-order">
+					<PrivateRoute path="/book-order/:id">
 						<BookOrder />
 					</PrivateRoute>
 					
