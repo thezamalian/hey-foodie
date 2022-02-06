@@ -51,7 +51,7 @@ const Footer = () => {
     return (
     <Typography
         component="footer"
-        sx={{ display: 'flex', bgcolor: 'secondary.light' }}
+        sx={{ display: 'flex', bgcolor: 'secondary.light', mt: '150px' }}
     >
       <Container sx={{ my: 8, display: 'flex' }}>
         <Grid container spacing={5}>

@@ -30,7 +30,7 @@ const Register = () => {
         e.preventDefault();
     }
     return (
-        <Container  sx={{mb: 5, mt: '150px'}}>
+        <Container  sx={{mb: 5,}}>
             <Typography variant="h5">
                 Please Register to Order Your Tastes
             </Typography>

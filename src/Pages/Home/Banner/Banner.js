@@ -10,7 +10,7 @@ const bannerStyle = {
 
 const Banner = () => {
     return (
-        <Container sx={{mt:5}}>
+        <Container sx={{}}>
             <Box style={bannerStyle}>
                 <Typography variant="h4" sx={{pt: 5, mb: 3, fontWeight: 500}}>
                     ASAP Take Your Taste

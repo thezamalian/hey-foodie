@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Grid, Tab, Typography } from '@mui/material';
 import { TabContext, TabList, TabPanel} from '@mui/lab';
 import Service from '../Service/Service';
 
 const Services = () => {
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = useState('2');
+    const [products, setProducts] = useState([]);
 
-    const foodArr = [1, 2, 3, 4, 5, 6];
+    const [breakfast, setBreakfast] = useState([]);
+    const [lunch, setLunch] = useState([]);
+    const [dinner, setDinner] = useState([]);
+
+    // const foodArr = [1, 2, 3, 4, 5, 6];
+
+    useEffect( () => {
+        const uri = `http://localhost:5000/foods`;
+        fetch(uri) 
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                setProducts(data);
+            });
+    },[])
+
+    useEffect( () => {
+        setBreakfast(products.filter(p => p.typeCode === 1));
+        setLunch(products.filter(p => p.typeCode === 2));
+        setDinner(products.filter(p => p.typeCode === 3));
+    }, [products]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -20,34 +41,37 @@ const Services = () => {
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
-                        <Tab label="Breakfast" value={1} />
-                        <Tab label="Lunch" value={2} />
-                        <Tab label="Dinner" value={3} />
+                        <Tab label="Breakfast" value='1' />
+                        <Tab label="Lunch" value='2' />
+                        <Tab label="Dinner" value='3' />
                     </TabList>
                     </Box>
-                    <TabPanel value={1}>
+                    <TabPanel value='1'>
                         <Box sx={{ flexGrow: 1 }}>
                             <Grid container spacing={2}>
-                                {foodArr.map((index) => <Service 
-                                        key={index} 
+                                {breakfast.map((food) => <Service 
+                                        key={food._id}
+                                        food={food} 
                                     />)}
                             </Grid>
                         </Box>
                     </TabPanel>
-                    <TabPanel value={2}>
+                    <TabPanel value='2'>
                         <Box sx={{ flexGrow: 1 }}>
                             <Grid container spacing={2}>
-                                {foodArr.map((index) => <Service 
-                                        key={index} 
+                                {lunch.map((food) => <Service 
+                                        key={food._id}
+                                        food={food} 
                                     />)}
                             </Grid>
                         </Box>
                     </TabPanel>
-                    <TabPanel value={3}>
+                    <TabPanel value='3'>
                         <Box sx={{ flexGrow: 1 }}>
                             <Grid container spacing={2}>
-                                {foodArr.map((index) => <Service 
-                                        key={index} 
+                                {dinner.map((food) => <Service 
+                                        key={food._id}
+                                        food={food} 
                                     />)}
                             </Grid>
                         </Box>
